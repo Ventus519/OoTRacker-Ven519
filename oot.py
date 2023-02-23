@@ -20,6 +20,7 @@ master_quest_keys = [0, 0, 0, 6, 5, 6, 9, "???", 3, 9, 0]
 
 #dungeon settings
 dungeon_entrance_rando = False
+dungeon_boss_rando = False
 dungeon_reward_type = "medallions" #type of reward required, options : medallions, stones, any
 medallions_collected = 0
 stones_collected = 0
