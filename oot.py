@@ -1,6 +1,7 @@
 import pygame
 
 
+
 #screen
 screenHeight = 1000
 screenWidth = 1000
@@ -10,32 +11,126 @@ pygame.init()
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption("Ocarina of Time Randomizer Tracker - Ven519")
 
-#lists for map tracker
-abs_required_items=["bow_1", "light_arrows", "magic_1", "master_sword"]
-song_locations=["zl", "eponas", "sarias", "suns", "time", "storms", "minuet", "preulde", "bolero", "serenade", "requiem", "nocturne"]
-dungeon_rewards = ["deku", "dc", "jabu", "forest", "fire", "water", "spirit", "shadow", "free"]
 
-vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 9, "???", 3, 9, 0]
-master_quest_keys = [0, 0, 0, 6, 5, 6, 9, "???", 3, 9, 0]
+def projectile_query(age):
+    if age == "adult":
+      if hookshotState >=1 or bowState == 1:
+        return True
+    elif age == "child":
+      if boomerangState == 1 or slingshotState == 1:
+        return True
+def beatable_vanilla_glitchless(dungeon):
+    if dungeon=="deku":
+      if accessible("deku"): #not done yet
+        return True
+    if dungeon == "dc":
+      if accessible("dc") and explosive_query(): #not done
+        return True
+    if dungeon == "jabu": 
+      if accessible("jabu") and boomerangState == 1:
+        return True
+      else:
+        return False
+    if dungeon == "shadow":
+        if accessible("shadow"):
+            if zl==True and projectile_query("adult") == True and bootState >= 2 and explosive_query() == True:
+                return True
+            else: 
+                return False
+        else:
+            return False
 
-#dungeon settings
-dungeon_entrance_rando = False
-dungeon_boss_rando = False
-dungeon_reward_type = "medallions" #type of reward required, options : medallions, stones, any
-medallions_collected = 0
-stones_collected = 0
-rewards_collected = 0
-dungeon_reward_amount = 6
-bombchu_enabled = False
-trials = 6
-logic = "glitchless"
-mq = False
-triforce_hunt = False
-dungeon_settings = [mq, dungeon_reward_type, dungeon_reward_amount, dungeon_entrance_rando, dungeon_boss_rando, trials, logic]
 
-#deku reqs
 
-#overworld settings
+
+def accessible(dungeon_location):
+    if dungeon_location == "deku":
+      return True
+    if dungeon_location=="dc":
+      if explosive_query() or strengthState ==1:
+        return True
+      else:
+        return False
+    if dungeon_location == "jabu":
+      if zora_fountain_query("child"):
+        return True
+      else:
+        return False
+    if dungeon_location == "shadow":
+        if dins==1 and nocturne==True and ocarinaState>=1 and magic == True:
+            return True
+        else:
+            return False
+    if dungeon_location == "ganon":
+       if reward_query(dungeon_reward_type):
+          return True
+       else:
+          return False
+    
+
+def explosive_query():
+    if bombState == 1:
+        return True
+    if bombchu_enabled == True and bombchuState == 1:
+        return True
+    else:
+        return False
+def desert_query(age):
+  if age == "adult":
+    if requiem:
+      return True  
+    if magic ==1 and lens == 1:
+      if hookshotState == 2 and gerudo_card == 1:
+        return True      
+      elif epona ==False and gerudo_card ==1 and bootState>=2:
+        return True
+      else:
+        return False
+    else:
+      return False
+  if age == "child":
+    if requiem:
+      return True
+    else:
+      return False
+
+def zora_fountain_query(age):
+  if age == "child":
+    if letter:
+      if scale >=1:
+        return True
+      elif explosive_query()==True and zl ==1 and ocarinaState >=1:
+        return True
+    else:
+      return False
+  if age == "adult":
+    if zl == 1 and ocarinaState>= 1 and letter == 1:
+      return True
+    else:
+      return False
+def reward_query(dungeon_reward_type):
+    if dungeon_reward_type == "any":
+      if rewards_collected == dungeon_reward_amount:
+         return True
+      else:
+         return False
+    if dungeon_reward_type == "medallion":
+      if medallions_collected == dungeon_reward_amount:
+         return True
+      else: 
+         return False
+    if dungeon_reward_type == "stone":
+       if stones_collected == dungeon_reward_amount:
+          return True
+       else:
+          return False
+
+
+def go_mode():
+   if accessible("ganon") and bowState == 1 and arrowState>=2 and magic==True:
+      return True
+   else:
+      return False
 
 
 #image loading
@@ -97,6 +192,31 @@ hookshot = imageScaling(100, 100, hookshot, 0.2)
 longshot = imageScaling(100, 100, longshot, 0.2)
 
 
+
+
+#vars
+#general settings
+vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 9, "???", 3, 9, 0]
+master_quest_keys = [0, 0, 0, 6, 5, 6, 9, "???", 3, 9, 0]
+
+#dungeon settings
+dungeon_entrance_rando = False
+dungeon_boss_rando = False
+
+bombchu_enabled = False
+trials = 6
+logic = "glitchless"
+mq = False
+triforce_hunt = False
+
+dungeon_reward_type = "medallions" #type of reward required, options : medallions, stones, any
+medallions_collected = 0
+stones_collected = 0
+rewards_collected = 0
+dungeon_reward_amount = 6
+dungeon_settings = [mq, dungeon_reward_type, dungeon_reward_amount, dungeon_entrance_rando, dungeon_boss_rando, trials, logic]
+
+#items and dungeon stuff
 #variables - drawing items (item states for progressive items)
 hookshotState = 0
 bottleState = 0
@@ -171,121 +291,7 @@ botw_location = dungeon_locations[8]
 gtg_location = dungeon_locations[9]
 ice_location = dungeon_locations[10]
 
-def accessible(dungeon_location):
-    if dungeon_location == "deku":
-      return True
-    if dungeon_location=="dc":
-      if explosive_query() or strengthState ==1:
-        return True
-      else:
-        return False
-    if dungeon_location == "jabu":
-      if zora_fountain_query("child"):
-        return True
-      else:
-        return False
-    if dungeon_location == "shadow":
-        if dins==1 and nocturne==True and ocarinaState>=1 and magic == True:
-            return True
-        else:
-            return False
-    if dungeon_location == "ganon":
-       if reward_query(dungeon_reward_type):
-          return True
-       else:
-          return False
-    
-def projectile_query(age):
-    if age == "adult":
-      if hookshotState >=1 or bowState == 1:
-        return True
-    elif age == "child":
-      if boomerangState == 1 or slingshotState == 1:
-        return True
-    else:
-      return False
-def explosive_query():
-    if bombState == 1:
-        return True
-    if bombchu_enabled == True and bombchuState == 1:
-        return True
-    else:
-        return False
-def desert_query(age):
-  if age == "adult":
-    if requiem:
-      return True  
-    if magic ==1 and lens == 1:
-      if hookshotState == 2 and gerudo_card == 1:
-        return True      
-      elif epona ==False and gerudo_card ==1 and bootState>=2:
-        return True
-      else:
-        return False
-    else:
-      return False
-  if age == "child":
-    if requiem:
-      return True
-    else:
-      return False
 
-def zora_fountain_query(age):
-  if age == "child":
-    if letter:
-      if scale >=1:
-        return True
-      elif explosive_query()==True and zl ==1 and ocarinaState >=1:
-        return True
-    else:
-      return False
-  if age == "adult":
-    if zl == 1 and ocarinaState>= 1 and letter == 1:
-      return True
-    else:
-      return False
-def reward_query(dungeon_reward_type):
-    if dungeon_reward_type == "any":
-      if rewards_collected == dungeon_reward_amount:
-         return True
-      else:
-         return False
-    if dungeon_reward_type == "medallion":
-      if medallions_collected == dungeon_reward_amount:
-         return True
-      else: 
-         return False
-    if dungeon_reward_type == "stone":
-       if stones_collected == dungeon_reward_amount:
-          return True
-       else:
-          return False
-
-def beatable_vanilla_glitchless(dungeon):
-    if dungeon=="deku":
-      if accessible("deku"): #not done yet
-        return True
-    if dungeon == "dc":
-      if accessible("dc") and explosive_query(): #not done
-        return True
-    if dungeon == "jabu": 
-      if accessible("jabu") and boomerangState == 1:
-        return True
-      else:
-        return False
-    if dungeon == "shadow":
-        if accessible("shadow"):
-            if zl==True and projectile_query("adult") == True and bootState >= 2 and explosive_query() == True:
-                return True
-            else: 
-                return False
-        else:
-            return False
-def go_mode():
-   if accessible("ganon") and bowState == 1 and arrowState>=2 and magic==True:
-      return True
-   else:
-      return False
 #rectangles, the bane of my existence
 hookshot_rect = pygame.Rect(100, 100, 50, 50) #50, 50 is the absolute rect size for hook
 while run == True:
