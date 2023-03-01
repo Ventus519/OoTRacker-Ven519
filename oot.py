@@ -9,7 +9,7 @@ screenWidth = 1000
 pygame.init()
 
 screen = pygame.display.set_mode((screenWidth, screenHeight))
-pygame.display.set_caption("Ocarina of Time Randomizer Tracker - Ven519")
+pygame.display.set_caption("Ocarina of Time 3D Randomizer Tracker - Ven519")
 
 
 def projectile_query(age):
@@ -31,6 +31,38 @@ def beatable_vanilla_glitchless(dungeon):
         return True
       else:
         return False
+    if dungeon == "forest":
+      if accessible("forest"):
+        if strengthState>=1 and bowState == 1 and hookshotState >=1:
+          return True
+        else: 
+          return False
+      else:
+        return False
+    if dungeon == "fire":
+      if accessible("fire"):
+        if hammerState == 1 and tunicState == (1 or 3) and bowState== 1 and hookshotState>=1 and explosive_query():
+          return True
+        else:
+          return False
+      else:
+        return False
+    if dungeon == "water":
+      if accessible("water"):
+        if hookshotState>=1 and bowState == 1 and bootState == (1 or 3) and ocarinaState >= 1 and zl == True and explosive_query():
+          return True
+        else:
+          return False
+      else:
+        return False
+    if dungeon == "spirit":
+      if accessible("spirit"):
+        if shieldState >=2 and strengthState>=2 and ocarinaState >=1 and zl == True and hookshotState>=1 and explosive_query():
+          return True
+        else:
+          return False
+      else:
+        return False
     if dungeon == "shadow":
         if accessible("shadow"):
             if zl==True and projectile_query("adult") == True and bootState >= 2 and explosive_query() == True:
@@ -39,7 +71,6 @@ def beatable_vanilla_glitchless(dungeon):
                 return False
         else:
             return False
-
 
 
 
@@ -53,6 +84,36 @@ def accessible(dungeon_location):
         return False
     if dungeon_location == "jabu":
       if zora_fountain_query("child"):
+        return True
+      else:
+        return False
+    if dungeon_location == "forest":
+      if hookshotState>=1 and ocarinaState >=1:
+        if minuet == True or sarias == True:
+          return True
+        else: 
+          return False
+      else:
+        return False
+    if dungeon_location == "fire":
+      if (bolero == True) or hookshotState >=1:
+        if explosive_query() == True or bowState>=1 or strengthState>=1:
+          return True
+        elif hammerState == 1 and bootState>=2:
+          return True
+        else:
+          return False
+      else:
+        return False
+    if dungeon_location == "water":
+      if bootState == (1 or 3) and hookshotState>=1:
+        return True
+      elif scale== 2 and hookshotState == 2:
+        return True
+      else:
+        return False
+    if dungeon_location == "spirit":
+      if desert_query("adult") or desert_query("child"):
         return True
       else:
         return False
@@ -71,7 +132,7 @@ def accessible(dungeon_location):
 def explosive_query():
     if bombState == 1:
         return True
-    if bombchu_enabled == True and bombchuState == 1:
+    elif bombchu_enabled == True and bombchuState == 1:
         return True
     else:
         return False
@@ -108,6 +169,7 @@ def zora_fountain_query(age):
       return True
     else:
       return False
+
 def reward_query(dungeon_reward_type):
     if dungeon_reward_type == "any":
       if rewards_collected == dungeon_reward_amount:
@@ -139,11 +201,13 @@ OoT_bg = pygame.image.load("assets/images/OoT/bg/OoT_bg.png").convert_alpha()
 item_bg = pygame.image.load("assets/images/OoT/bg/items.png").convert_alpha()
   #default item loading
 default_hookshot = pygame.image.load("assets/images/OoT/items/hookshot/hookshot_0.png").convert_alpha()
-default_bow = pygame.image.load("assets/images/OoT/items/bow/no.png").convert_alpha()
+default_bow = pygame.image.load("assets/images/OoT/items/bow/bow_gray.png").convert_alpha()
   
   #obtained item loading
 hookshot = pygame.image.load("assets/images/OoT/items/hookshot/hookshot.png").convert_alpha()
 longshot = pygame.image.load("assets/images/OoT/items/hookshot/longshot.png").convert_alpha()
+
+bow = pygame.image.load("assets/images/OoT/items/bow/bow.png").convert_alpha()
 
   #dungeon reward loading - medallions
 default_light = pygame.image.load("assets/images/OoT/medallions/light_gray.png").convert_alpha()
@@ -231,6 +295,7 @@ bowState = 0
 arrowState = 0
 tunicState = 0 #needs to allow both goron and zora tunic to be displayed
 bootState = 0 #needs to allow both iron and hover -> 2 = hovers only, 1 = irons only, 3 = both
+hammerState = 0
 
 #dungeons and skulltula
 forest_keyState = 0
@@ -268,8 +333,16 @@ light_rewardState = 0
 ocarinaState = 0
 zl = False
 epona = False
+sarias = False
+suns = False
+storms = False
+SoT = False
+minuet = False
+bolero = False
+serenade = False
 requiem = False
 nocturne = False
+prelude = False
 magic = False
 dins = 0
 strengthState =0
@@ -327,12 +400,11 @@ while run == True:
           x, y = event.pos
           if hookshot_rect.collidepoint(x, y) and hookshotState == 0:
                 hookshotState = 1
-                print("hookshot")
                 start = True
                 break
           if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
                 hookshotState = 2
-                print("longshot")
                 start = True
+          
         if event.type == pygame.QUIT:
           run = False
