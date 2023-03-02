@@ -249,11 +249,12 @@ OoT_bg = imageScaling(0, 0, OoT_bg, 4)
 item_bg = imageScaling(0, 0, item_bg, 0.75)
 
 #item scaling - default items
-default_hookshot = imageScaling(100, 100, default_hookshot, 0.2)
-default_bow = imageScaling(240, 0, default_bow, 0.2)
+default_hookshot = imageScaling(0, 75, default_hookshot, 0.2)
+default_bow = imageScaling(0, 0, default_bow, 1.5)
 #item scaling - clicked forms
-hookshot = imageScaling(100, 100, hookshot, 0.2)
-longshot = imageScaling(100, 100, longshot, 0.2)
+hookshot = imageScaling(0, 75, hookshot, 0.2)
+longshot = imageScaling(0, 75, longshot, 0.2)
+bow = imageScaling(0, 0, bow, 1.5)
 
 
 
@@ -365,8 +366,9 @@ gtg_location = dungeon_locations[9]
 ice_location = dungeon_locations[10]
 
 
-#rectangles, the bane of my existence
-hookshot_rect = pygame.Rect(100, 100, 50, 50) #50, 50 is the absolute rect size for hook
+#rectangles
+hookshot_rect = pygame.Rect(0, 75, 50, 50) #50, 50 is the absolute rect size for hook
+bow_rect = pygame.Rect(0, 0, 50, 50) #attempting bow rect, its a little short but works
 while run == True:
   while start == True:
     screen.fill((0, 0, 0))
@@ -380,6 +382,8 @@ while run == True:
           longshot.draw()
     if bowState == 0:
           default_bow.draw()
+    if bowState == 1:
+          bow.draw()
     print("Has Adult Projectile: " + str(projectile_query("adult")))
     print("Dungeon Reward Type: " + str(dungeon_reward_type))
     print("Ammount Required: " + str(dungeon_reward_amount))
@@ -395,16 +399,21 @@ while run == True:
                     hookshotState = 0
               elif hookshot_rect.collidepoint(x, y) and hookshotState == 2:
                     hookshotState = 1
+              if bow_rect.collidepoint(x, y) and bowState == 1:
+                    bowState = 0
               start = True
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: #left click event
-          x, y = event.pos
-          if hookshot_rect.collidepoint(x, y) and hookshotState == 0:
-                hookshotState = 1
-                start = True
-                break
-          if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
-                hookshotState = 2
-                start = True
+              x, y = event.pos
+              if hookshot_rect.collidepoint(x, y) and hookshotState == 0:
+                    hookshotState = 1
+                    start = True
+                    break
+              if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
+                    hookshotState = 2
+                    start = True
+              if bow_rect.collidepoint(x, y) and bowState == 0:
+                    bowState = 1
+                    start = True
           
         if event.type == pygame.QUIT:
           run = False
