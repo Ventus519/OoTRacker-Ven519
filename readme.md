@@ -1,4 +1,4 @@
-This program is meant to be use in combination ith a randomized seed for the Legend of Zelda: Ocarina of Time 3D Randomizer.
+This program is meant to be use in combination with a randomized seed for the Legend of Zelda: Ocarina of Time 3D Randomizer.
 This program takes into account the logic used in the randomizer for the "glitchless" logic setting.
 This program can be used to select obtain items at any point in the randomizer. The program will also show if a specific dungeon is completable given the items obtained. NOTE: THIS PROGRAM DOES NOT COME WITH A TIMER, use other programs for that purpose. 
 This program does not utilize a map tracker.
