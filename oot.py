@@ -211,22 +211,22 @@ bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow.png").convert_alpha
 
   #dungeon reward loading - medallions
 default_light = pygame.image.load("assets/images/OoT/medallions/light_gray.png").convert_alpha()
-clicked_light = pygame.image.load("assets/images/Oot/medallions/light.png").convert_alpha()
+clicked_light = pygame.image.load("assets/images/Oot/gear/medallion/light_medallion.png").convert_alpha()
 
 default_forest = pygame.image.load("assets/images/OoT/medallions/forest_gray.png").convert_alpha()
-clicked_forest = pygame.image.load("assets/images/OoT/medallions/forest.png").convert_alpha()
+clicked_forest = pygame.image.load("assets/images/OoT/geaar/medallion/forest.png").convert_alpha()
 
 default_fire = pygame.image.load("assets/images/OoT/medallions/fire_gray.png").convert_alpha()
-clicked_fire = pygame.image.load("assets/images/OoT/medallions/fire.png").convert_alpha()
+clicked_fire = pygame.image.load("assets/images/OoT/gear/medallion/fire.png").convert_alpha()
 
 default_water = pygame.image.load("assets/images/OoT/medallions/water_gray.png").convert_alpha()
-clicked_water = pygame.image.load("assets/images/OoT/medallions/water.png").convert_alpha()
+clicked_water = pygame.image.load("assets/images/OoT/gear/medallion/water.png").convert_alpha()
 
 default_spirit = pygame.image.load("assets/images/OoT/medallions/spirit_gray.png").convert_alpha()
-clicked_spirit = pygame.image.load("assets/images/OoT/medallions/spirit.png").convert_alpha()
+clicked_spirit = pygame.image.load("assets/images/OoT/gear/medallion/spirit.png").convert_alpha()
 
 default_shadow = pygame.image.load("assets/images/OoT/medallions/shadow_gray.png").convert_alpha()
-clicked_shadow = pygame.image.load("assets/images/OoT/medallions/shadow.png").convert_alpha()
+clicked_shadow = pygame.image.load("assets/images/OoT/gear/medallion/shadow.png").convert_alpha()
 
 
 #classes for defining image, scale, and location
