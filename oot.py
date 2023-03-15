@@ -200,14 +200,14 @@ def go_mode():
 OoT_bg = pygame.image.load("assets/images/OoT/bg/OoT_bg.png").convert_alpha()
 item_bg = pygame.image.load("assets/images/OoT/bg/items.png").convert_alpha()
   #default item loading
-default_hookshot = pygame.image.load("assets/images/OoT/items/hookshot/hookshot_0.png").convert_alpha()
-default_bow = pygame.image.load("assets/images/OoT/items/bow/bow_gray.png").convert_alpha()
+default_hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hookshot_0.png").convert_alpha()
+default_bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow_gray.png").convert_alpha()
   
   #obtained item loading
-hookshot = pygame.image.load("assets/images/OoT/items/hookshot/hookshot.png").convert_alpha()
-longshot = pygame.image.load("assets/images/OoT/items/hookshot/longshot.png").convert_alpha()
+hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hookshot.png").convert_alpha()
+longshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/longshot.png").convert_alpha()
 
-bow = pygame.image.load("assets/images/OoT/items/bow/bow.png").convert_alpha()
+bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow.png").convert_alpha()
 
   #dungeon reward loading - medallions
 default_light = pygame.image.load("assets/images/OoT/medallions/light_gray.png").convert_alpha()
