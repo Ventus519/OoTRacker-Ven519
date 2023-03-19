@@ -204,8 +204,8 @@ default_hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/ho
 default_bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow_gray.png").convert_alpha()
   
   #obtained item loading
-hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hookshot.png").convert_alpha()
-longshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/longshot.png").convert_alpha()
+hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hook.png").convert_alpha()
+longshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/long.png").convert_alpha()
 
 bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow.png").convert_alpha()
 
@@ -252,8 +252,8 @@ item_bg = imageScaling(0, 0, item_bg, 0.75)
 default_hookshot = imageScaling(0, 75, default_hookshot, 0.2)
 default_bow = imageScaling(0, 0, default_bow, 1.5)
 #item scaling - clicked forms
-hookshot = imageScaling(0, 75, hookshot, 0.2)
-longshot = imageScaling(0, 75, longshot, 0.2)
+hookshot = imageScaling(0, 75, hookshot, 1.5)
+longshot = imageScaling(0, 75, longshot, 1.5)
 bow = imageScaling(0, 0, bow, 1.5)
 
 
