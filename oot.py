@@ -57,7 +57,7 @@ def beatable_vanilla_glitchless(dungeon):
         return False
     if dungeon == "spirit":
       if accessible("spirit"):
-        if shieldState >=2 and strengthState>=2 and ocarinaState >=1 and zl == True and hookshotState>=1 and explosive_query():
+        if mirrorState ==1 and strengthState>=2 and ocarinaState >=1 and zl == True and hookshotState>=1 and explosive_query():
           return True
         else:
           return False
@@ -196,37 +196,73 @@ def go_mode():
 
 
 #image loading
-  #background (not yet)
-OoT_bg = pygame.image.load("assets/images/OoT/bg/OoT_bg.png").convert_alpha()
-item_bg = pygame.image.load("assets/images/OoT/bg/items.png").convert_alpha()
+
   #default item loading
 default_hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hookshot_0.png").convert_alpha()
 default_bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow_gray.png").convert_alpha()
+default_boots = pygame.image.load("assets/images/OoT/items/inv/boots/boots_0.png").convert_alpha()
   
   #obtained item loading
 hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hook.png").convert_alpha()
 longshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/long.png").convert_alpha()
 
+bombs = pygame.image.load("assets/images/OoT/items/inv/bombs.png").convert_alpha()
+
 bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow.png").convert_alpha()
+
+hammer = pygame.image.load("assets/images/OoT/items/inv/hammer.png").convert_alpha()
+
+fire_arrow = pygame.image.load("assets/images/OoT/items/inv/bow/fire_arrow.png").convert_alpha()
+light_arrow = pygame.image.load("assets/images/OoT/items/inv/bow/light_arrow.png").convert_alpha()
+fire_light_mix = pygame.image.load("assets/images/OoT/items/inv/bow/fire_light_mix.png").convert_alpha()
+ice_arrow = pygame.image.load("assets/images/OoT/items/inv/bow/ice_arrow.png").convert_alpha()
+
+hovers = pygame.image.load("assets/images/OoT/items/inv/boots/hovers.png").convert_alpha()
+irons = pygame.image.load("assets/images/OoT/items/inv/boots/irons.png").convert_alpha()
 
   #dungeon reward loading - medallions
 default_light = pygame.image.load("assets/images/OoT/medallions/light_gray.png").convert_alpha()
-clicked_light = pygame.image.load("assets/images/Oot/gear/medallion/light_medallion.png").convert_alpha()
+clicked_light = pygame.image.load("assets/images/Oot/items/gear/medallion/clicked/light_medallion.png").convert_alpha()
 
 default_forest = pygame.image.load("assets/images/OoT/medallions/forest_gray.png").convert_alpha()
-clicked_forest = pygame.image.load("assets/images/OoT/geaar/medallion/forest.png").convert_alpha()
+clicked_forest = pygame.image.load("assets/images/OoT/items/gear/medallion/clicked/forest.png").convert_alpha()
 
 default_fire = pygame.image.load("assets/images/OoT/medallions/fire_gray.png").convert_alpha()
-clicked_fire = pygame.image.load("assets/images/OoT/gear/medallion/fire.png").convert_alpha()
+clicked_fire = pygame.image.load("assets/images/OoT/items/gear/medallion/clicked/fire.png").convert_alpha()
 
 default_water = pygame.image.load("assets/images/OoT/medallions/water_gray.png").convert_alpha()
-clicked_water = pygame.image.load("assets/images/OoT/gear/medallion/water.png").convert_alpha()
+clicked_water = pygame.image.load("assets/images/OoT/items/gear/medallion/clicked/water.png").convert_alpha()
 
 default_spirit = pygame.image.load("assets/images/OoT/medallions/spirit_gray.png").convert_alpha()
-clicked_spirit = pygame.image.load("assets/images/OoT/gear/medallion/spirit.png").convert_alpha()
+clicked_spirit = pygame.image.load("assets/images/OoT/items/gear/medallion/clicked/spirit.png").convert_alpha()
 
 default_shadow = pygame.image.load("assets/images/OoT/medallions/shadow_gray.png").convert_alpha()
-clicked_shadow = pygame.image.load("assets/images/OoT/gear/medallion/shadow.png").convert_alpha()
+clicked_shadow = pygame.image.load("assets/images/OoT/items/gear/medallion/clicked/shadow.png").convert_alpha()
+
+  #dungeon rewards - stones
+emerald = pygame.image.load("assets/images/OoT/items/gear/stones/emerald.png").convert_alpha()
+
+ruby = pygame.image.load("assets/images/OoT/items/gear/stones/ruby.png").convert_alpha()
+
+sapphire = pygame.image.load("assets/images/OoT/items/gear/stones/sapphire.png").convert_alpha()
+
+  #gear image loading
+      #default items - not obtained
+
+      #obtained items
+scale_1 = pygame.image.load("assets/images/OoT/items/gear/scale/scale_1.png").convert_alpha()
+scale_2 = pygame.image.load("assets/images/OoT/items/gear/scale/scale_2.png").convert_alpha()
+
+shield_0 = pygame.image.load("assets/images/OoT/items/gear/shield/deku.png").convert_alpha()
+shield_1 = pygame.image.load("assets/images/OoT/items/gear/shield/hylian.png").convert_alpha()
+shield_2 = pygame.image.load("assets/images/OoT/items/gear/shield/mirror.png").convert_alpha()
+
+  #dungeon items
+small_key = pygame.image.load("assets/images/OoT/items/dungeon/small_key.png").convert_alpha()
+dungeon_map = pygame.image.load("assets/images/OoT/items/dungeon/map.png").convert_alpha()
+compass = pygame.image.load("assets/images/OoT/items/dungeon/compass.png").convert_alpha()
+boss_key = pygame.image.load("assets/images/OoT/items/dungeon/boss_key.png").convert_alpha()
+
 
 
 #classes for defining image, scale, and location
@@ -245,8 +281,7 @@ class imageScaling():
      
 start = True
 run = True
-OoT_bg = imageScaling(0, 0, OoT_bg, 4)
-item_bg = imageScaling(0, 0, item_bg, 0.75)
+
 
 #item scaling - default items
 default_hookshot = imageScaling(0, 75, default_hookshot, 0.2)
@@ -291,7 +326,7 @@ slingshotState = 0
 boomerangState = 0
 stickState = 0
 nutState = 0
-shieldState = 0 #needs to allow both left and right click events to change image
+mirrorState = 0
 bowState = 0
 arrowState = 0
 tunicState = 0 #needs to allow both goron and zora tunic to be displayed
