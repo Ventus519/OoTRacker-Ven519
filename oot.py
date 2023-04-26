@@ -259,6 +259,11 @@ shield_2 = pygame.image.load("assets/images/OoT/items/gear/shield/mirror.png").c
 
   #dungeon items
 small_key = pygame.image.load("assets/images/OoT/items/dungeon/small_key.png").convert_alpha()
+forest_small = pygame.image.load("assets/images/OoT/items/dungeon/forest_small.png").convert_alpha()
+fire_small = pygame.image.load("assets/images/OoT/items/dungeon/fire_small.png").convert_alpha()
+water_small = pygame.image.load("assets/images/OoT/items/dungeon/water_small.png").convert_alpha()
+shadow_small = pygame.image.load("assets/images/OoT/items/dungeon/shadow_small.png").convert_alpha()
+spirit_small = pygame.image.load("assets/images/OoT/items/dungeon/spirit_small.png").convert_alpha()
 dungeon_map = pygame.image.load("assets/images/OoT/items/dungeon/map.png").convert_alpha()
 compass = pygame.image.load("assets/images/OoT/items/dungeon/compass.png").convert_alpha()
 boss_key = pygame.image.load("assets/images/OoT/items/dungeon/boss_key.png").convert_alpha()
@@ -290,14 +295,21 @@ default_bow = imageScaling(0, 0, default_bow, 1.5)
 hookshot = imageScaling(0, 75, hookshot, 1.5)
 longshot = imageScaling(0, 75, longshot, 1.5)
 bow = imageScaling(0, 0, bow, 1.5)
+forest_smalls = imageScaling(0, 150, forest_small, 1.5)
+fire_smalls = imageScaling(0, 225, fire_small, 1.5)
+water_smalls = imageScaling(0, 300, water_small, 1.5)
+spirit_smalls = imageScaling(0, 375, spirit_small, 1.5)
+shadow_smalls = imageScaling(0, 450, shadow_small, 1.5)
 
 
 
 
 #vars
 #general settings
-vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 9, "???", 3, 9, 0]
-master_quest_keys = [0, 0, 0, 6, 5, 6, 9, "???", 3, 9, 0]
+vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 9, 5, 3, 9, 0]
+master_quest_keys = [0, 0, 0, 6, 5, 6, 9, 5, 3, 9, 0]
+obtained_keys = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 
 #dungeon settings
 dungeon_entrance_rando = False
@@ -334,13 +346,6 @@ bootState = 0 #needs to allow both iron and hover -> 2 = hovers only, 1 = irons 
 hammerState = 0
 
 #dungeons and skulltula
-forest_keyState = 0
-fire_keyState = 0
-water_keyState = 0
-spirit_keyState = 0
-shadow_keyState = 0
-gtg_keyState = 0
-botw_keyState = 0
 skulltulaState = 0
 
 #support for dungeon entrance rando
@@ -404,6 +409,11 @@ ice_location = dungeon_locations[10]
 #rectangles
 hookshot_rect = pygame.Rect(0, 75, 50, 50) #50, 50 is the absolute rect size for hook
 bow_rect = pygame.Rect(0, 0, 50, 50) #attempting bow rect, its a little short but works
+forest_small_rect = pygame.Rect(0, 150, 50, 50)
+fire_small_rect = pygame.Rect(0, 225, 50, 50)
+water_small_rect = pygame.Rect(0, 300, 50, 50)
+spirit_small_rect = pygame.Rect(0, 375, 50, 50)
+shadow_small_rect = pygame.Rect(0, 450, 50, 50)
 while run == True:
   while start == True:
     screen.fill((0, 0, 0))
@@ -419,10 +429,16 @@ while run == True:
           default_bow.draw()
     if bowState == 1:
           bow.draw()
+    forest_smalls.draw()
+    fire_smalls.draw()
+    water_smalls.draw()
+    spirit_smalls.draw()
+    shadow_smalls.draw()
     print("Has Adult Projectile: " + str(projectile_query("adult")))
     print("Dungeon Reward Type: " + str(dungeon_reward_type))
     print("Ammount Required: " + str(dungeon_reward_amount))
     print("Go Mode Status: " + str(go_mode()))
+    print("Spirit Temple Small Keys: [7]" + str(obtained_keys[7]))
     start = False
     pygame.display.update()
   for event in pygame.event.get():
@@ -436,19 +452,21 @@ while run == True:
                     hookshotState = 1
               if bow_rect.collidepoint(x, y) and bowState == 1:
                     bowState = 0
+              if spirit_small_rect.collidepoint(x, y) and obtained_keys[7] > 0:
+                 obtained_keys[7] -=1
               start = True
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: #left click event
               x, y = event.pos
               if hookshot_rect.collidepoint(x, y) and hookshotState == 0:
                     hookshotState = 1
                     start = True
-                    break
+                    break #this was added because otherwise drawing hookshot would be skipped for drawing longshot
               if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
                     hookshotState = 2
-                    start = True
               if bow_rect.collidepoint(x, y) and bowState == 0:
-                    bowState = 1
-                    start = True
-          
+                    bowState = 1  
+              if spirit_small_rect.collidepoint(x, y) and obtained_keys[7] < vanilla_dungeon_keys[7]:
+                 obtained_keys[7] +=1
+              start = True
         if event.type == pygame.QUIT:
           run = False
