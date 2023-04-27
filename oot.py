@@ -188,11 +188,7 @@ def reward_query(dungeon_reward_type):
           return False
 
 
-def go_mode():
-   if accessible("ganon") and bowState == 1 and arrowState>=2 and magic==True:
-      return True
-   else:
-      return False
+
 
 
 #image loading
@@ -307,7 +303,6 @@ shadow_smalls = imageScaling(0, 450, shadow_small, 1.5)
 #vars
 #general settings
 vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 9, 5, 3, 9, 0]
-master_quest_keys = [0, 0, 0, 6, 5, 6, 9, 5, 3, 9, 0]
 obtained_keys = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
@@ -414,8 +409,20 @@ fire_small_rect = pygame.Rect(0, 225, 50, 50)
 water_small_rect = pygame.Rect(0, 300, 50, 50)
 spirit_small_rect = pygame.Rect(0, 375, 50, 50)
 shadow_small_rect = pygame.Rect(0, 450, 50, 50)
+
+def go_mode():
+   if accessible("ganon") and bowState == 1 and arrowState>=2 and magic==True:
+      return True
+   else:
+      return False
+   
 while run == True:
   while start == True:
+    print("Go Mode Status: " + str(go_mode()))
+    print("Has Adult Projectile: " + str(projectile_query("adult")))
+    print("Dungeon Reward Type: " + str(dungeon_reward_type))
+    print("Ammount Required: " + str(dungeon_reward_amount))
+    print("Spirit Temple Small Keys: " + str(obtained_keys[7]))
     screen.fill((0, 0, 0))
     #OoT_bg.draw()
     #item_bg.draw()
@@ -437,7 +444,6 @@ while run == True:
     print("Has Adult Projectile: " + str(projectile_query("adult")))
     print("Dungeon Reward Type: " + str(dungeon_reward_type))
     print("Ammount Required: " + str(dungeon_reward_amount))
-    print("Go Mode Status: " + str(go_mode()))
     print("Spirit Temple Small Keys: [7]" + str(obtained_keys[7]))
     start = False
     pygame.display.update()
@@ -446,17 +452,19 @@ while run == True:
         #print(event)
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3:
               x, y = event.pos
+              if spirit_small_rect.collidepoint(x, y) and obtained_keys[7] > 0:
+                 obtained_keys[7] -=1
               if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
                     hookshotState = 0
               elif hookshot_rect.collidepoint(x, y) and hookshotState == 2:
                     hookshotState = 1
               if bow_rect.collidepoint(x, y) and bowState == 1:
                     bowState = 0
-              if spirit_small_rect.collidepoint(x, y) and obtained_keys[7] > 0:
-                 obtained_keys[7] -=1
               start = True
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: #left click event
               x, y = event.pos
+              if spirit_small_rect.collidepoint(x, y) and obtained_keys[7] < vanilla_dungeon_keys[7]:
+                 obtained_keys[7] +=1
               if hookshot_rect.collidepoint(x, y) and hookshotState == 0:
                     hookshotState = 1
                     start = True
@@ -465,8 +473,6 @@ while run == True:
                     hookshotState = 2
               if bow_rect.collidepoint(x, y) and bowState == 0:
                     bowState = 1  
-              if spirit_small_rect.collidepoint(x, y) and obtained_keys[7] < vanilla_dungeon_keys[7]:
-                 obtained_keys[7] +=1
               start = True
         if event.type == pygame.QUIT:
           run = False
