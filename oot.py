@@ -255,11 +255,49 @@ shield_2 = pygame.image.load("assets/images/OoT/items/gear/shield/mirror.png").c
 
   #dungeon items
 small_key = pygame.image.load("assets/images/OoT/items/dungeon/small_key.png").convert_alpha()
-forest_small = pygame.image.load("assets/images/OoT/items/dungeon/forest_small.png").convert_alpha()
-fire_small = pygame.image.load("assets/images/OoT/items/dungeon/fire_small.png").convert_alpha()
-water_small = pygame.image.load("assets/images/OoT/items/dungeon/water_small.png").convert_alpha()
-shadow_small = pygame.image.load("assets/images/OoT/items/dungeon/shadow_small.png").convert_alpha()
-spirit_small = pygame.image.load("assets/images/OoT/items/dungeon/spirit_small.png").convert_alpha()
+forest_small = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small.png").convert_alpha()
+forest_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small_1.png").convert_alpha()
+forest_small_2 = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small_2.png").convert_alpha()
+forest_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small_3.png").convert_alpha()
+forest_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small_4.png").convert_alpha()
+forest_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small_5.png").convert_alpha()
+
+fire_small = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small.png").convert_alpha()
+fire_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_1.png").convert_alpha()
+fire_small_2 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_2.png").convert_alpha()
+fire_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_3.png").convert_alpha()
+fire_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_4.png").convert_alpha()
+fire_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_5.png").convert_alpha()
+fire_small_6 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_6.png").convert_alpha()
+fire_small_7 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_7.png").convert_alpha()
+fire_small_8 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_8.png").convert_alpha()
+
+water_small = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small.png").convert_alpha()
+water_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_1.png").convert_alpha()
+water_small_2 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_2.png").convert_alpha()
+water_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_3.png").convert_alpha()
+water_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_4.png").convert_alpha()
+water_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_5.png").convert_alpha()
+water_small_6 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_6.png").convert_alpha()
+
+shadow_small = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small.png").convert_alpha()
+shadow_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_1.png").convert_alpha()
+shadow_small_2 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_2.png").convert_alpha()
+shadow_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_3.png").convert_alpha()
+shadow_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_4.png").convert_alpha()
+shadow_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_5.png").convert_alpha()
+shadow_small_6 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_6.png").convert_alpha()
+shadow_small_7 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_7.png").convert_alpha()
+shadow_small_8 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_8.png").convert_alpha()
+shadow_small_9 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_9.png").convert_alpha()
+
+spirit_small = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small.png").convert_alpha()
+spirit_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_1.png").convert_alpha()
+spirit_small_2 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_2.png").convert_alpha()
+spirit_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_3.png").convert_alpha()
+spirit_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_4.png").convert_alpha()
+spirit_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_5.png").convert_alpha()
+
 dungeon_map = pygame.image.load("assets/images/OoT/items/dungeon/map.png").convert_alpha()
 compass = pygame.image.load("assets/images/OoT/items/dungeon/compass.png").convert_alpha()
 boss_key = pygame.image.load("assets/images/OoT/items/dungeon/boss_key.png").convert_alpha()
@@ -291,14 +329,48 @@ default_bow = imageScaling(0, 0, default_bow, 1.5)
 hookshot = imageScaling(0, 75, hookshot, 1.5)
 longshot = imageScaling(0, 75, longshot, 1.5)
 bow = imageScaling(0, 0, bow, 1.5)
-forest_smalls = imageScaling(0, 150, forest_small, 1.5)
-fire_smalls = imageScaling(0, 225, fire_small, 1.5)
-water_smalls = imageScaling(0, 300, water_small, 1.5)
-spirit_smalls = imageScaling(0, 375, spirit_small, 1.5)
-shadow_smalls = imageScaling(0, 450, shadow_small, 1.5)
+forest_small = imageScaling(0, 150, forest_small, 1.5)
+forest_small_1 = imageScaling(0, 150, forest_small_1, 1.5)
+forest_small_2 = imageScaling(0, 150, forest_small_2, 1.5)
+forest_small_3 = imageScaling(0, 150, forest_small_3, 1.5)
+forest_small_4 = imageScaling(0, 150, forest_small_4, 1.5)
+forest_small_5 = imageScaling(0, 150, forest_small_5, 1.5)
 
+fire_small = imageScaling(0, 225, fire_small, 1.5)
+fire_small_1 = imageScaling(0, 225, fire_small_1, 1.5)
+fire_small_2 = imageScaling(0, 225, fire_small_2, 1.5)
+fire_small_3 = imageScaling(0, 225, fire_small_3, 1.5)
+fire_small_4 = imageScaling(0, 225, fire_small_4, 1.5)
+fire_small_5 = imageScaling(0, 225, fire_small_5, 1.5)
+fire_small_6 = imageScaling(0, 225, fire_small_6, 1.5)
+fire_small_7 = imageScaling(0, 225, fire_small_7, 1.5)
+fire_small_8 = imageScaling(0, 225, fire_small_8, 1.5)
 
+water_small = imageScaling(0, 300, water_small, 1.5)
+water_small_1 = imageScaling(0, 300, water_small_1, 1.5)
+water_small_2 = imageScaling(0, 300, water_small_2, 1.5)
+water_small_3 = imageScaling(0, 300, water_small_3, 1.5)
+water_small_4 = imageScaling(0, 300, water_small_4, 1.5)
+water_small_5 = imageScaling(0, 300, water_small_5, 1.5)
+water_small_6 = imageScaling(0, 300, water_small_6, 1.5)
 
+spirit_small = imageScaling(0, 375, spirit_small, 1.5)
+spirit_small_1 = imageScaling(0, 375, spirit_small_1, 1.5)
+spirit_small_2 = imageScaling(0, 375, spirit_small_2, 1.5)
+spirit_small_3 = imageScaling(0, 375, spirit_small_3, 1.5)
+spirit_small_4 = imageScaling(0, 375, spirit_small_4, 1.5)
+spirit_small_5 = imageScaling(0, 375, spirit_small_5, 1.5)
+
+shadow_small = imageScaling(0, 450, shadow_small, 1.5)
+shadow_small_1 = imageScaling(0, 450, shadow_small_1, 1.5)
+shadow_small_2 = imageScaling(0, 450, shadow_small_2, 1.5)
+shadow_small_3 = imageScaling(0, 450, shadow_small_3, 1.5)
+shadow_small_4 = imageScaling(0, 450, shadow_small_4, 1.5)
+shadow_small_5 = imageScaling(0, 450, shadow_small_5, 1.5)
+shadow_small_6= imageScaling(0, 450, shadow_small_6, 1.5)
+shadow_small_7 = imageScaling(0, 450, shadow_small_7, 1.5)
+shadow_small_8 = imageScaling(0, 450, shadow_small_8, 1.5)
+shadow_small_9 = imageScaling(0, 450, shadow_small_9, 1.5)
 
 #vars
 #general settings
@@ -436,11 +508,26 @@ while run == True:
           default_bow.draw()
     if bowState == 1:
           bow.draw()
-    forest_smalls.draw()
-    fire_smalls.draw()
-    water_smalls.draw()
-    spirit_smalls.draw()
-    shadow_smalls.draw()
+    if obtained_keys[3] == 0:
+      forest_small.draw()
+    if obtained_keys[3] == 1:
+      forest_small_1.draw() 
+    if obtained_keys[3] == 2:
+       forest_small_2.draw() 
+    if obtained_keys[3] == 3:
+       forest_small_3.draw()    
+    if obtained_keys[3] == 4:
+       forest_small_4.draw() 
+    if obtained_keys[3] == 5:
+       forest_small_5.draw()    
+    if obtained_keys[7] == 0:
+       spirit_small.draw()
+    if obtained_keys[7] == 1:
+       spirit_small_1.draw()
+    fire_small.draw()
+    water_small.draw()
+    spirit_small.draw()
+    shadow_small.draw()
     print("Has Adult Projectile: " + str(projectile_query("adult")))
     print("Dungeon Reward Type: " + str(dungeon_reward_type))
     print("Ammount Required: " + str(dungeon_reward_amount))
@@ -454,6 +541,8 @@ while run == True:
               x, y = event.pos
               if spirit_small_rect.collidepoint(x, y) and obtained_keys[7] > 0:
                  obtained_keys[7] -=1
+              if forest_small_rect.collidepoint(x, y) and obtained_keys[3] > 0:
+                 obtained_keys[3] -=1
               if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
                     hookshotState = 0
               elif hookshot_rect.collidepoint(x, y) and hookshotState == 2:
@@ -465,6 +554,8 @@ while run == True:
               x, y = event.pos
               if spirit_small_rect.collidepoint(x, y) and obtained_keys[7] < vanilla_dungeon_keys[7]:
                  obtained_keys[7] +=1
+              if forest_small_rect.collidepoint(x, y) and obtained_keys[3] < vanilla_dungeon_keys[3]:
+                 obtained_keys[3] +=1
               if hookshot_rect.collidepoint(x, y) and hookshotState == 0:
                     hookshotState = 1
                     start = True
