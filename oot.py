@@ -21,11 +21,15 @@ def projectile_query(age):
         return True
 def beatable_vanilla_glitchless(dungeon):
     if dungeon=="deku":
-      if accessible("deku"): #not done yet
+      if accessible("deku") and slingshotState == 1: 
         return True
+      else:
+         return False
     if dungeon == "dc":
-      if accessible("dc") and explosive_query(): #not done
+      if accessible("dc") and explosive_query(): 
         return True
+      else:
+         return False
     if dungeon == "jabu": 
       if accessible("jabu") and boomerangState == 1:
         return True
@@ -33,7 +37,7 @@ def beatable_vanilla_glitchless(dungeon):
         return False
     if dungeon == "forest":
       if accessible("forest"):
-        if strengthState>=1 and bowState == 1 and hookshotState >=1:
+        if strengthState>=1 and bowState == 1 and hookshotState >=1 and boss_keys[3]:
           return True
         else: 
           return False
@@ -41,7 +45,7 @@ def beatable_vanilla_glitchless(dungeon):
         return False
     if dungeon == "fire":
       if accessible("fire"):
-        if hammerState == 1 and tunicState == (1 or 3) and bowState== 1 and hookshotState>=1 and explosive_query():
+        if hammerState == 1 and tunicState == (1 or 3) and bowState== 1 and hookshotState>=1 and explosive_query() and boss_keys[4]:
           return True
         else:
           return False
@@ -49,7 +53,7 @@ def beatable_vanilla_glitchless(dungeon):
         return False
     if dungeon == "water":
       if accessible("water"):
-        if hookshotState>=1 and bowState == 1 and bootState == (1 or 3) and ocarinaState >= 1 and zl == True and explosive_query():
+        if hookshotState>=1 and bowState == 1 and bootState == (1 or 3) and ocarinaState >= 1 and zl == True and explosive_query() and boss_keys[5]:
           return True
         else:
           return False
@@ -57,7 +61,7 @@ def beatable_vanilla_glitchless(dungeon):
         return False
     if dungeon == "spirit":
       if accessible("spirit"):
-        if mirrorState ==1 and strengthState>=2 and ocarinaState >=1 and zl == True and hookshotState>=1 and explosive_query():
+        if mirrorState ==1 and strengthState>=2 and ocarinaState >=1 and zl == True and hookshotState>=1 and explosive_query() and obtained_keys[7] >= 3 and boss_keys[7]:
           return True
         else:
           return False
@@ -65,7 +69,7 @@ def beatable_vanilla_glitchless(dungeon):
         return False
     if dungeon == "shadow":
         if accessible("shadow"):
-            if zl==True and projectile_query("adult") == True and bootState >= 2 and explosive_query() == True:
+            if zl==True and projectile_query("adult") == True and bootState >= 2 and explosive_query() and obtained_keys[6] ==5 and boss_keys[6]:
                 return True
             else: 
                 return False
@@ -261,6 +265,7 @@ forest_small_2 = pygame.image.load("assets/images/OoT/items/dungeon/forest/fores
 forest_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small_3.png").convert_alpha()
 forest_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small_4.png").convert_alpha()
 forest_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_small_5.png").convert_alpha()
+forest_boss = pygame.image.load("assets/images/OoT/items/dungeon/forest/forest_boss.png").convert_alpha()
 
 fire_small = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small.png").convert_alpha()
 fire_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_1.png").convert_alpha()
@@ -271,6 +276,7 @@ fire_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_smal
 fire_small_6 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_6.png").convert_alpha()
 fire_small_7 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_7.png").convert_alpha()
 fire_small_8 = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_small_8.png").convert_alpha()
+fire_boss = pygame.image.load("assets/images/OoT/items/dungeon/fire/fire_boss.png").convert_alpha()
 
 water_small = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small.png").convert_alpha()
 water_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_1.png").convert_alpha()
@@ -279,6 +285,7 @@ water_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_s
 water_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_4.png").convert_alpha()
 water_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_5.png").convert_alpha()
 water_small_6 = pygame.image.load("assets/images/OoT/items/dungeon/water/water_small_6.png").convert_alpha()
+water_boss = pygame.image.load("assets/images/OoT/items/dungeon/water/water_boss.png").convert_alpha()
 
 shadow_small = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small.png").convert_alpha()
 shadow_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_1.png").convert_alpha()
@@ -286,10 +293,7 @@ shadow_small_2 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shado
 shadow_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_3.png").convert_alpha()
 shadow_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_4.png").convert_alpha()
 shadow_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_5.png").convert_alpha()
-shadow_small_6 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_6.png").convert_alpha()
-shadow_small_7 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_7.png").convert_alpha()
-shadow_small_8 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_8.png").convert_alpha()
-shadow_small_9 = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_small_9.png").convert_alpha()
+shadow_boss = pygame.image.load("assets/images/OoT/items/dungeon/shadow/shadow_boss.png").convert_alpha()
 
 spirit_small = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small.png").convert_alpha()
 spirit_small_1 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_1.png").convert_alpha()
@@ -297,10 +301,12 @@ spirit_small_2 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spiri
 spirit_small_3 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_3.png").convert_alpha()
 spirit_small_4 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_4.png").convert_alpha()
 spirit_small_5 = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_small_5.png").convert_alpha()
+spirit_boss = pygame.image.load("assets/images/OoT/items/dungeon/spirit/spirit_boss.png").convert_alpha()
 
 dungeon_map = pygame.image.load("assets/images/OoT/items/dungeon/map.png").convert_alpha()
 compass = pygame.image.load("assets/images/OoT/items/dungeon/compass.png").convert_alpha()
 boss_key = pygame.image.load("assets/images/OoT/items/dungeon/boss_key.png").convert_alpha()
+boss_key_default = pygame.image.load("assets/images/OoT/items/dungeon/boss_key_gray.png").convert_alpha()
 
 
 
@@ -335,6 +341,8 @@ forest_small_2 = imageScaling(0, 150, forest_small_2, 1.5)
 forest_small_3 = imageScaling(0, 150, forest_small_3, 1.5)
 forest_small_4 = imageScaling(0, 150, forest_small_4, 1.5)
 forest_small_5 = imageScaling(0, 150, forest_small_5, 1.5)
+forest_boss = imageScaling(75, 150, forest_boss, 1.5)
+forest_boss_0 = imageScaling(75, 150, boss_key_default, 1.5)
 
 fire_small = imageScaling(0, 225, fire_small, 1.5)
 fire_small_1 = imageScaling(0, 225, fire_small_1, 1.5)
@@ -345,6 +353,8 @@ fire_small_5 = imageScaling(0, 225, fire_small_5, 1.5)
 fire_small_6 = imageScaling(0, 225, fire_small_6, 1.5)
 fire_small_7 = imageScaling(0, 225, fire_small_7, 1.5)
 fire_small_8 = imageScaling(0, 225, fire_small_8, 1.5)
+fire_boss = imageScaling(75, 225, fire_boss, 1.5)
+fire_boss_0 = imageScaling(75, 225, boss_key_default, 1.5)
 
 water_small = imageScaling(0, 300, water_small, 1.5)
 water_small_1 = imageScaling(0, 300, water_small_1, 1.5)
@@ -353,6 +363,8 @@ water_small_3 = imageScaling(0, 300, water_small_3, 1.5)
 water_small_4 = imageScaling(0, 300, water_small_4, 1.5)
 water_small_5 = imageScaling(0, 300, water_small_5, 1.5)
 water_small_6 = imageScaling(0, 300, water_small_6, 1.5)
+water_boss = imageScaling(75, 300, water_boss, 1.5)
+water_boss_0 = imageScaling(75, 300, boss_key_default, 1.5)
 
 spirit_small = imageScaling(0, 375, spirit_small, 1.5)
 spirit_small_1 = imageScaling(0, 375, spirit_small_1, 1.5)
@@ -360,6 +372,8 @@ spirit_small_2 = imageScaling(0, 375, spirit_small_2, 1.5)
 spirit_small_3 = imageScaling(0, 375, spirit_small_3, 1.5)
 spirit_small_4 = imageScaling(0, 375, spirit_small_4, 1.5)
 spirit_small_5 = imageScaling(0, 375, spirit_small_5, 1.5)
+spirit_boss = imageScaling(75, 375, spirit_boss, 1.5)
+spirit_boss_0 = imageScaling(75, 375, boss_key_default, 1.5)
 
 shadow_small = imageScaling(0, 450, shadow_small, 1.5)
 shadow_small_1 = imageScaling(0, 450, shadow_small_1, 1.5)
@@ -367,15 +381,15 @@ shadow_small_2 = imageScaling(0, 450, shadow_small_2, 1.5)
 shadow_small_3 = imageScaling(0, 450, shadow_small_3, 1.5)
 shadow_small_4 = imageScaling(0, 450, shadow_small_4, 1.5)
 shadow_small_5 = imageScaling(0, 450, shadow_small_5, 1.5)
-shadow_small_6= imageScaling(0, 450, shadow_small_6, 1.5)
-shadow_small_7 = imageScaling(0, 450, shadow_small_7, 1.5)
-shadow_small_8 = imageScaling(0, 450, shadow_small_8, 1.5)
-shadow_small_9 = imageScaling(0, 450, shadow_small_9, 1.5)
+shadow_boss = imageScaling(75, 450, shadow_boss, 1.5)
+shadow_boss_0 = imageScaling(75, 450, boss_key_default, 1.5)
+
 
 #vars
 #general settings
-vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 9, 5, 3, 9, 0]
+vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 5, 5, 3, 9, 0]
 obtained_keys = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+boss_keys = [0, 0, 0, 0, 0, 0, 0, 0, 0] #idices 0-3 are primarily just for consistency with other lists, index 8 is for ganon
 
 
 #dungeon settings
@@ -477,13 +491,18 @@ ice_location = dungeon_locations[10]
 hookshot_rect = pygame.Rect(0, 75, 50, 50) #50, 50 is the absolute rect size for hook
 bow_rect = pygame.Rect(0, 0, 50, 50) #attempting bow rect, its a little short but works
 forest_small_rect = pygame.Rect(0, 150, 50, 50)
+forest_boss_rect = pygame.Rect(75, 150, 50, 50)
 fire_small_rect = pygame.Rect(0, 225, 50, 50)
+fire_boss_rect = pygame.Rect(75, 225, 50, 50)
 water_small_rect = pygame.Rect(0, 300, 50, 50)
+water_boss_rect = pygame.Rect(75, 300, 50, 50)
 spirit_small_rect = pygame.Rect(0, 375, 50, 50)
+spirit_boss_rect = pygame.Rect(75, 375, 50, 50)
 shadow_small_rect = pygame.Rect(0, 450, 50, 50)
+shadow_boss_rect = pygame.Rect(75, 450, 50, 50)
 
 def go_mode():
-   if accessible("ganon") and bowState == 1 and arrowState>=2 and magic==True:
+   if accessible("ganon") and bowState == 1 and arrowState>=2 and magic==True and boss_keys[8]:
       return True
    else:
       return False
@@ -524,14 +543,78 @@ while run == True:
        spirit_small.draw()
     if obtained_keys[7] == 1:
        spirit_small_1.draw()
-    fire_small.draw()
-    water_small.draw()
-    spirit_small.draw()
-    shadow_small.draw()
-    print("Has Adult Projectile: " + str(projectile_query("adult")))
-    print("Dungeon Reward Type: " + str(dungeon_reward_type))
-    print("Ammount Required: " + str(dungeon_reward_amount))
-    print("Spirit Temple Small Keys: [7]" + str(obtained_keys[7]))
+    if obtained_keys[7] == 2:
+       spirit_small_2.draw()
+    if obtained_keys[7] == 3:
+       spirit_small_3.draw()
+    if obtained_keys[7] == 4:
+       spirit_small_4.draw()
+    if obtained_keys[7] == 5:
+       spirit_small_5.draw()
+    if obtained_keys[6] == 0:
+       shadow_small.draw()
+    if obtained_keys[6] == 1:
+       shadow_small_1.draw()
+    if obtained_keys[6] == 2:
+       shadow_small_2.draw()
+    if obtained_keys[6] == 3:
+       shadow_small_3.draw()
+    if obtained_keys[6] == 4:
+       shadow_small_4.draw()
+    if obtained_keys[6] == 5:
+       shadow_small_5.draw()
+    if obtained_keys[5] == 0:
+       water_small.draw()
+    if obtained_keys[5] == 1:
+       water_small_1.draw()
+    if obtained_keys[5] == 2:
+       water_small_2.draw()
+    if obtained_keys[5] == 3:
+       water_small_3.draw()
+    if obtained_keys[5] == 4:
+       water_small_4.draw()
+    if obtained_keys[5] == 5:
+       water_small_5.draw()
+    if obtained_keys[5] == 6:
+       water_small_6.draw()
+    if obtained_keys[4] == 0:
+        fire_small.draw()   
+    if obtained_keys[4] == 1:
+       fire_small_1.draw()
+    if obtained_keys[4] == 2:
+       fire_small_2.draw()
+    if obtained_keys[4] == 3:
+       fire_small_3.draw()
+    if obtained_keys[4] == 4:
+       fire_small_4.draw()
+    if obtained_keys[4] == 5:
+       fire_small_5.draw()
+    if obtained_keys[4] == 6:
+       fire_small_6.draw()
+    if obtained_keys[4] == 7:
+       fire_small_7.draw()
+    if obtained_keys[4] == 8:
+       fire_small_8.draw()
+    if boss_keys[3] == 0:
+       forest_boss_0.draw()
+    if boss_keys[3] == 1:
+       forest_boss.draw()
+    if boss_keys[4] == 0:
+       fire_boss_0.draw()
+    if boss_keys[4] == 1:
+       fire_boss.draw()
+    if boss_keys[5] == 0:
+       water_boss_0.draw()
+    if boss_keys[5] == 1:
+       water_boss.draw()
+    if boss_keys[6] == 0:
+       shadow_boss_0.draw()
+    if boss_keys[6] == 1:
+       shadow_boss.draw()
+    if boss_keys[7] == 0:
+       spirit_boss_0.draw()
+    if boss_keys[7] == 1:
+       spirit_boss.draw()
     start = False
     pygame.display.update()
   for event in pygame.event.get():
@@ -543,6 +626,22 @@ while run == True:
                  obtained_keys[7] -=1
               if forest_small_rect.collidepoint(x, y) and obtained_keys[3] > 0:
                  obtained_keys[3] -=1
+              if shadow_small_rect.collidepoint(x, y) and obtained_keys[6] > 0:
+                 obtained_keys[6] -=1
+              if water_small_rect.collidepoint(x, y) and obtained_keys[5] >0:
+                 obtained_keys[5] -=1
+              if fire_small_rect.collidepoint(x, y) and obtained_keys[4] >0:
+                 obtained_keys[4] -=1
+              if spirit_boss_rect.collidepoint(x, y) and boss_keys[7] > 0:
+                 boss_keys[7] -=1
+              if forest_boss_rect.collidepoint(x, y) and boss_keys[3] > 0:
+                 boss_keys[3] -=1
+              if shadow_boss_rect.collidepoint(x, y) and boss_keys[6] > 0:
+                 boss_keys[6] -=1
+              if water_boss_rect.collidepoint(x, y) and boss_keys[5] >0:
+                 boss_keys[5] -=1
+              if fire_boss_rect.collidepoint(x, y) and boss_keys[4] >0:
+                 boss_keys[4] -=1   
               if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
                     hookshotState = 0
               elif hookshot_rect.collidepoint(x, y) and hookshotState == 2:
@@ -556,6 +655,24 @@ while run == True:
                  obtained_keys[7] +=1
               if forest_small_rect.collidepoint(x, y) and obtained_keys[3] < vanilla_dungeon_keys[3]:
                  obtained_keys[3] +=1
+              if shadow_small_rect.collidepoint(x, y) and obtained_keys[6] < vanilla_dungeon_keys[6]:
+                 obtained_keys[6] +=1
+              if water_small_rect.collidepoint(x, y) and obtained_keys[5] < vanilla_dungeon_keys[5]:
+                 obtained_keys[5] +=1
+              if fire_small_rect.collidepoint(x, y) and obtained_keys[4] < vanilla_dungeon_keys[4]:
+                 obtained_keys[4] +=1
+
+              if spirit_boss_rect.collidepoint(x, y) and boss_keys[7] < 1:
+                 boss_keys[7] +=1
+              if forest_boss_rect.collidepoint(x, y) and boss_keys[3] < 1:
+                 boss_keys[3] +=1
+              if shadow_boss_rect.collidepoint(x, y) and boss_keys[6] < 1:
+                 boss_keys[6] +=1
+              if water_boss_rect.collidepoint(x, y) and boss_keys[5] < 1:
+                 boss_keys[5] +=1
+              if fire_boss_rect.collidepoint(x, y) and boss_keys[4] < 1:
+                 boss_keys[4] +=1
+
               if hookshot_rect.collidepoint(x, y) and hookshotState == 0:
                     hookshotState = 1
                     start = True
