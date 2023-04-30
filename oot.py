@@ -208,11 +208,11 @@ default_hammer = pygame.image.load("assets/images/OoT/items/inv/misc/default/ham
 hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hook.png").convert_alpha()
 longshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/long.png").convert_alpha()
 
-bombs = pygame.image.load("assets/images/OoT/items/inv/bombs.png").convert_alpha()
+bombs = pygame.image.load("assets/images/OoT/items/inv/misc/clicked/bombs.png").convert_alpha()
 
 bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow.png").convert_alpha()
 
-hammer = pygame.image.load("assets/images/OoT/items/inv/hammer.png").convert_alpha()
+hammer = pygame.image.load("assets/images/OoT/items/inv/misc/clicked/hammer.png").convert_alpha()
 
 fire_arrow = pygame.image.load("assets/images/OoT/items/inv/bow/fire_arrow.png").convert_alpha()
 light_arrow = pygame.image.load("assets/images/OoT/items/inv/bow/light_arrow.png").convert_alpha()
@@ -245,7 +245,7 @@ clicked_shadow = pygame.image.load("assets/images/OoT/items/gear/medallion/click
 emerald = pygame.image.load("assets/images/OoT/items/gear/stones/emerald.png").convert_alpha()
 emerald = pygame.image.load("assets/images/OoT/items/gear/stones/emerald_0.png").convert_alpha()
 ruby = pygame.image.load("assets/images/OoT/items/gear/stones/ruby.png").convert_alpha()
-ruby = pygame.image.load("assets/images/OoT/items/gear/stones/ruby.png_0").convert_alpha()
+ruby = pygame.image.load("assets/images/OoT/items/gear/stones/ruby_0.png").convert_alpha()
 sapphire = pygame.image.load("assets/images/OoT/items/gear/stones/sapphire.png").convert_alpha()
 sapphire = pygame.image.load("assets/images/OoT/items/gear/stones/sapphire_0.png").convert_alpha()
 
@@ -442,6 +442,7 @@ nutState = 0
 mirrorState = 0
 bowState = 0
 arrowState = 0
+storedArrowState = 0
 tunicState = 0 #needs to allow both goron and zora tunic to be displayed
 bootState = 0 #needs to allow both iron and hover -> 2 = hovers only, 1 = irons only, 3 = both
 hammerState = 0
@@ -536,6 +537,7 @@ while run == True:
     print("Dungeon Reward Type: " + str(dungeon_reward_type))
     print("Ammount Required: " + str(dungeon_reward_amount))
     print("Spirit Temple Small Keys: " + str(obtained_keys[7]))
+    print(arrowState)
     screen.fill((0, 0, 0))
     #OoT_bg.draw()
     #item_bg.draw()
@@ -658,7 +660,7 @@ while run == True:
     if dungeon_rewards[7] == 1:
        spirit.draw()
     if arrowState == 0:
-       arrow_0.draw()
+       default_arrow.draw()
     if arrowState == 1:
        fire_arrow.draw()
     if arrowState == 2:
@@ -708,7 +710,18 @@ while run == True:
                  medallions_collected -=1
               if spirit_rect.collidepoint(x, y) and dungeon_rewards[7] == 1:
                  dungeon_rewards[7]-=1
-                 medallions_collected -=1      
+                 medallions_collected -=1  
+              if arrow_rect.collidepoint(x, y):
+                 if arrowState >=2:
+                     start = True  
+                     arrowState-=2
+                 else:
+                    arrowState +=2
+                    start = True
+                 
+              
+                 
+                   
 
               if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
                     hookshotState = 0
@@ -766,6 +779,14 @@ while run == True:
                     hookshotState = 2
               if bow_rect.collidepoint(x, y) and bowState == 0:
                     bowState = 1  
+              if arrow_rect.collidepoint(x, y):
+                 if arrowState == 1 or arrowState == 3:
+                     start = True  
+                     arrowState-=1
+                 else:
+                    arrowState +=1
+                    start = True
+
               start = True
         if event.type == pygame.QUIT:
           run = False
