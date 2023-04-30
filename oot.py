@@ -201,6 +201,8 @@ def reward_query(dungeon_reward_type):
 default_hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hookshot_0.png").convert_alpha()
 default_bow = pygame.image.load("assets/images/OoT/items/inv/bow/bow_gray.png").convert_alpha()
 default_boots = pygame.image.load("assets/images/OoT/items/inv/boots/boots_0.png").convert_alpha()
+default_bombs = pygame.image.load("assets/images/OoT/items/inv/misc/default/bombs.png").convert_alpha()
+default_hammer = pygame.image.load("assets/images/OoT/items/inv/misc/default/hammer.png").convert_alpha()
   
   #obtained item loading
 hookshot = pygame.image.load("assets/images/OoT/items/inv/progressive/hookshot/hook.png").convert_alpha()
@@ -215,7 +217,7 @@ hammer = pygame.image.load("assets/images/OoT/items/inv/hammer.png").convert_alp
 fire_arrow = pygame.image.load("assets/images/OoT/items/inv/bow/fire_arrow.png").convert_alpha()
 light_arrow = pygame.image.load("assets/images/OoT/items/inv/bow/light_arrow.png").convert_alpha()
 fire_light_mix = pygame.image.load("assets/images/OoT/items/inv/bow/fire_light_mix.png").convert_alpha()
-ice_arrow = pygame.image.load("assets/images/OoT/items/inv/bow/ice_arrow.png").convert_alpha()
+arrow_0 = pygame.image.load("assets/images/OoT/items/inv/bow/arrow_0.png").convert_alpha()
 
 hovers = pygame.image.load("assets/images/OoT/items/inv/boots/hovers.png").convert_alpha()
 irons = pygame.image.load("assets/images/OoT/items/inv/boots/irons.png").convert_alpha()
@@ -236,15 +238,16 @@ clicked_water = pygame.image.load("assets/images/OoT/items/gear/medallion/clicke
 default_spirit = pygame.image.load("assets/images/OoT/items/gear/medallion/gray/spirit.png").convert_alpha()
 clicked_spirit = pygame.image.load("assets/images/OoT/items/gear/medallion/clicked/spirit.png").convert_alpha()
 
-default_shadow = pygame.image.load("assets/images/OoT/items/gear/medallion/gray/spirit.png").convert_alpha()
+default_shadow = pygame.image.load("assets/images/OoT/items/gear/medallion/gray/shadow.png").convert_alpha()
 clicked_shadow = pygame.image.load("assets/images/OoT/items/gear/medallion/clicked/shadow.png").convert_alpha()
 
   #dungeon rewards - stones
 emerald = pygame.image.load("assets/images/OoT/items/gear/stones/emerald.png").convert_alpha()
-
+emerald = pygame.image.load("assets/images/OoT/items/gear/stones/emerald_0.png").convert_alpha()
 ruby = pygame.image.load("assets/images/OoT/items/gear/stones/ruby.png").convert_alpha()
-
+ruby = pygame.image.load("assets/images/OoT/items/gear/stones/ruby.png_0").convert_alpha()
 sapphire = pygame.image.load("assets/images/OoT/items/gear/stones/sapphire.png").convert_alpha()
+sapphire = pygame.image.load("assets/images/OoT/items/gear/stones/sapphire_0.png").convert_alpha()
 
   #gear image loading
       #default items - not obtained
@@ -331,6 +334,7 @@ run = True
 #item scaling - default items
 default_hookshot = imageScaling(0, 75, default_hookshot, 1.5)
 default_bow = imageScaling(0, 0, default_bow, 1.5)
+default_arrow = imageScaling(75, 0, arrow_0, 1.5)
 
 default_forest = imageScaling(150, 150, default_forest, 1.5)
 default_fire = imageScaling(150, 225, default_fire, 1.5)
@@ -341,6 +345,10 @@ default_shadow = imageScaling(150, 450, default_shadow, 1.5)
 hookshot = imageScaling(0, 75, hookshot, 1.5)
 longshot = imageScaling(0, 75, longshot, 1.5)
 bow = imageScaling(0, 0, bow, 1.5)
+fire_arrow = imageScaling(75, 0, fire_arrow, 1.5)
+light_arrow = imageScaling(75, 0, light_arrow, 1.5)
+fire_light_mix = imageScaling(75, 0, fire_light_mix, 1.5)
+
 forest_small = imageScaling(0, 150, forest_small, 1.5)
 forest_small_1 = imageScaling(0, 150, forest_small_1, 1.5)
 forest_small_2 = imageScaling(0, 150, forest_small_2, 1.5)
@@ -398,9 +406,9 @@ shadow = imageScaling(150, 450, clicked_shadow, 1.5)
 
 #vars
 #general settings
-vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 5, 5, 3, 9, 0]
-obtained_keys = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-boss_keys = [0, 0, 0, 0, 0, 0, 0, 0, 0] #idices 0-3 are primarily just for consistency with other lists, index 8 is for ganon
+vanilla_dungeon_keys = [0, 0, 0, 5, 8, 6, 5, 5, 3, 9, 0, 2]
+obtained_keys = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] #index 11 for ganon
+boss_keys = [0, 0, 0, 0, 0, 0, 0, 0, 0] #idices 0-2 are primarily just for consistency with other lists, index 8 is for ganon
 
 
 #dungeon settings
@@ -493,17 +501,27 @@ ice_location = dungeon_locations[10]
 #rectangles
 hookshot_rect = pygame.Rect(0, 75, 50, 50) #50, 50 is the absolute rect size for hook
 bow_rect = pygame.Rect(0, 0, 50, 50) #attempting bow rect, its a little short but works
+arrow_rect = pygame.Rect(75, 0, 50, 50)
+
 forest_small_rect = pygame.Rect(0, 150, 50, 50)
 forest_boss_rect = pygame.Rect(75, 150, 50, 50)
 forest_rect = pygame.Rect(150, 150, 50, 50)
+
 fire_small_rect = pygame.Rect(0, 225, 50, 50)
 fire_boss_rect = pygame.Rect(75, 225, 50, 50)
+fire_rect = pygame.Rect(150, 225, 50, 50)
+
 water_small_rect = pygame.Rect(0, 300, 50, 50)
 water_boss_rect = pygame.Rect(75, 300, 50, 50)
+water_rect = pygame.Rect(150, 300, 50, 50)
+
 spirit_small_rect = pygame.Rect(0, 375, 50, 50)
 spirit_boss_rect = pygame.Rect(75, 375, 50, 50)
+spirit_rect = pygame.Rect(150, 375, 50, 50)
+
 shadow_small_rect = pygame.Rect(0, 450, 50, 50)
 shadow_boss_rect = pygame.Rect(75, 450, 50, 50)
+shadow_rect = pygame.Rect(150, 450, 50, 50)
 
 def go_mode():
    if accessible("ganon") and bowState == 1 and arrowState>=2 and magic==True and boss_keys[8]:
@@ -623,6 +641,30 @@ while run == True:
       default_forest.draw()
     if dungeon_rewards[3] == 1:
        forest.draw()
+    if dungeon_rewards[4] == 0:
+       default_fire.draw()
+    if dungeon_rewards[4] == 1:
+       fire.draw()
+    if dungeon_rewards[5] == 0:
+       default_water.draw()
+    if dungeon_rewards[5] == 1:
+       water.draw()
+    if dungeon_rewards[6] == 0:
+       default_shadow.draw()
+    if dungeon_rewards[6] == 1:
+       shadow.draw()
+    if dungeon_rewards[7] == 0:
+       default_spirit.draw()
+    if dungeon_rewards[7] == 1:
+       spirit.draw()
+    if arrowState == 0:
+       arrow_0.draw()
+    if arrowState == 1:
+       fire_arrow.draw()
+    if arrowState == 2:
+       light_arrow.draw()
+    if arrowState == 3:
+       fire_light_mix.draw()                        
     start = False
     pygame.display.update()
   for event in pygame.event.get():
@@ -655,12 +697,26 @@ while run == True:
               if forest_rect.collidepoint(x, y) and dungeon_rewards[3] == 1:
                  dungeon_rewards[3]-=1
                  medallions_collected -=1
+              if fire_rect.collidepoint(x, y) and dungeon_rewards[4] == 1:
+                 dungeon_rewards[4]-=1
+                 medallions_collected -=1 
+              if water_rect.collidepoint(x, y) and dungeon_rewards[5] == 1:
+                 dungeon_rewards[5]-=1
+                 medallions_collected -=1   
+              if shadow_rect.collidepoint(x, y) and dungeon_rewards[6] == 1:
+                 dungeon_rewards[6]-=1
+                 medallions_collected -=1
+              if spirit_rect.collidepoint(x, y) and dungeon_rewards[7] == 1:
+                 dungeon_rewards[7]-=1
+                 medallions_collected -=1      
+
               if hookshot_rect.collidepoint(x, y) and hookshotState == 1:
                     hookshotState = 0
               elif hookshot_rect.collidepoint(x, y) and hookshotState == 2:
-                    hookshotState = 1
+                    hookshotState = 1\
+
               if bow_rect.collidepoint(x, y) and bowState == 1:
-                    bowState = 0
+                    bowState = 0 
               start = True
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: #left click event
               x, y = event.pos
@@ -689,6 +745,19 @@ while run == True:
               if forest_rect.collidepoint(x, y) and dungeon_rewards[3] == 0:
                  dungeon_rewards[3]+=1 
                  medallions_collected +=1
+              if fire_rect.collidepoint(x, y) and dungeon_rewards[4] == 0:
+                 dungeon_rewards[4]+=1
+                 medallions_collected +=1 
+              if water_rect.collidepoint(x, y) and dungeon_rewards[5] == 0:
+                 dungeon_rewards[5]+=1
+                 medallions_collected -=1   
+              if shadow_rect.collidepoint(x, y) and dungeon_rewards[6] == 0:
+                 dungeon_rewards[6]+=1
+                 medallions_collected +=1
+              if spirit_rect.collidepoint(x, y) and dungeon_rewards[7] == 0:
+                 dungeon_rewards[7]+=1
+                 medallions_collected +=1      
+
               if hookshot_rect.collidepoint(x, y) and hookshotState == 0:
                     hookshotState = 1
                     start = True
